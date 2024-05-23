@@ -1,5 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-import { Check, Phone, Star } from 'lucide-react'
+import { Check, Star } from 'lucide-react'
+import Phone from '@/components/Phone'
 
 export default function Home() {
   return (
@@ -112,7 +113,7 @@ export default function Home() {
 
           <div
             className="lg:mg-x col-span-full mt-32 flex
-          h-fit w-full justify-center px-8 sm:px-16 md:px-0 lg:col-span-1
+          h-fit w-full justify-center px-8 sm:px-16 md:px-0 lg:col-span-1 lg:mx-0
           lg:mt-20"
           >
             <div className="relative md:max-w-xl">
@@ -120,13 +121,14 @@ export default function Home() {
                 src="/your-image.png"
                 className="absolute -top-20 left-56 hidden w-40 select-none
                 sm:block lg:hidden lg:w-52 xl:block"
-                alt=""
+                alt="your image text"
               />
               <img
                 src="/line.png"
-                alt="absolute w-20 -left-6 -bottom-6 select-none"
+                className="absolute -bottom-6 -left-6 w-20 select-none"
+                alt="line"
               />
-              <Phone />
+              <Phone className="w-64" imgSrc="/testimonials/1.jpg" />
             </div>
           </div>
         </MaxWidthWrapper>
