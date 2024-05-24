@@ -8,7 +8,7 @@ export function Reviews() {
         aria-hidden="true"
         src="/what-people-are-buying.png"
         alt=""
-        className="absolute -left-32 top-1/3 select-none xl:block"
+        className="absolute -left-32 top-1/3 hidden select-none xl:block"
       />
 
       <ReviewGrid />

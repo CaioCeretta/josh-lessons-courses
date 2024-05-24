@@ -23,12 +23,10 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
 
   return (
     <div
-      className={
-        (cn(
-          'animate-fade-in rounded-2[25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5',
-        ),
-        className)
-      }
+      className={cn(
+        'animate-fade-in rounded-[2.25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5',
+        className,
+      )}
       style={{ animationDelay }}
       {...props}
     >
