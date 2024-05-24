@@ -1,6 +1,8 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Check, Star } from 'lucide-react'
 import Phone from '@/components/Phone'
+import { Icons } from '@/components/Icons'
+import { Reviews } from '@/components/Reviews'
 
 export default function Home() {
   return (
@@ -132,6 +134,153 @@ export default function Home() {
             </div>
           </div>
         </MaxWidthWrapper>
+      </section>
+
+      {/* Value proposition section, how do we prove that value that we provide */}
+      <section className="bg-slate-100 py-24">
+        <MaxWidthWrapper className="gap-16sm:gap-32 flex flex-col items-center">
+          <div className="flex flex-col items-center gap-4 sm:gap-6 lg:flex-row">
+            <h2
+              className="order-1 mt-2 text-balance text-center text-5xl
+            font-bold !leading-tight tracking-tight text-gray-900 md:text-6xl"
+            >
+              What our{' '}
+              <span className="relative px-2">
+                customers
+                <Icons.underline
+                  className="pointer-events-none absolute inset-x-0 -bottom-6
+                hidden text-green-500 sm:block"
+                />{' '}
+              </span>
+              say
+            </h2>
+
+            <img
+              src="/snake-2.png"
+              alt=""
+              className="order-0 w-24 lg:order-2"
+            />
+          </div>
+
+          <div
+            className="mx-auto my-10 grid max-w-2xl grid-cols-1 gap-y-16 px-4 lg:mx-0
+          lg:max-w-none lg:grid-cols-2"
+          >
+            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+              <div className="mb-2 flex gap-0.5">
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+              </div>
+              <div className="text-lg leading-8">
+                <p>
+                  "The case feels durable and i even got a compliment on the
+                  design. Had the case for two and a half months now and{' '}
+                  <span className="bg-slate-800 p-0.5 text-white">
+                    the image is super clear
+                  </span>
+                  , on the case i had before, the image started fading into
+                  yellowish color after a couple weeks, love it!
+                </p>
+              </div>
+
+              <div className="flex-gap-4 mt-2">
+                <img
+                  src="/users/user-1.png"
+                  alt="user image"
+                  className="h-12 w-12 rounded-full object-cover"
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">Jorginho</p>
+                  <div className="flex items-center gap-1.5 text-zinc-600">
+                    <Check className="h-4 w-4 stroke-[3px] text-green-600" />
+                    <p className="text-sm">Verified Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+              <div className="mb-2 flex gap-0.5">
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+              </div>
+              <div className="text-lg leading-8">
+                <p>
+                  "I usually keep my phone together with my keys in my pockets,
+                  and that led to some pretty heavy scratchmarks on all of my
+                  last phone cases. This one, besides a barely noticeable
+                  scratch on the corner,{' '}
+                  <span className="5 bg-slate-800 p-0 text-white">
+                    looks brand new after about half a year{' '}
+                  </span>{' '}
+                  . I dig it! "
+                </p>
+              </div>
+
+              <div className="flex-gap-4 mt-2">
+                <img
+                  src="/users/user-2.png"
+                  alt="user image"
+                  className="h-12 w-12 rounded-full object-cover"
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">Claudia</p>
+                  <div className="flex items-center gap-1.5 text-zinc-600">
+                    <Check className="h-4 w-4 stroke-[3px] text-green-600" />
+                    <p className="text-sm">Verified Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+              <div className="mb-2 flex gap-0.5">
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+                <Star className="h-5 w-5 fill-green-600 text-green-600" />
+              </div>
+              <div className="text-lg leading-8">
+                <p>
+                  <p>
+                    "The case feels durable and i even got a compliment on the
+                    design. Had the case for two and a half months now and{' '}
+                    <span className="bg-slate-800 p-0.5 text-white">
+                      the image is super clear
+                    </span>
+                    , on the case i had before, the image started fading into
+                    yellowish color after a couple weeks, love it!
+                  </p>
+                </p>
+              </div>
+
+              <div className="flex-gap-4 mt-2">
+                <img
+                  src="/users/user-4.jpg"
+                  alt="user image"
+                  className="h-12 w-12 rounded-full object-cover"
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold">Cleitin</p>
+                  <div className="flex items-center gap-1.5 text-zinc-600">
+                    <Check className="h-4 w-4 stroke-[3px] text-green-600" />
+                    <p className="text-sm">Verified Purchase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </MaxWidthWrapper>
+
+        <div className="pt-16">
+          <Reviews />
+        </div>
       </section>
     </div>
   )
