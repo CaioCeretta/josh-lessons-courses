@@ -16,6 +16,8 @@ export function splitArray<T>(array: Array<T>, numParts: number) {
   /* We don't know yet what type is the T, but whatever kind, for example, we will use this on the phones, the phones
   is an array of strings, so the T will know be an array of strings, the same happens in other type cases.  */
   const result: Array<Array<T>> = []
+  /* Here we are creating a multidimensional array, where the first Array are the columns and the Array inside is the
+  rows */
 
   for (let i = 0; i < array.length; i++) {
     const index = i % numParts
