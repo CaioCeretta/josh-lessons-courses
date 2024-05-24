@@ -4,7 +4,6 @@ import React, { HTMLAttributes } from 'react'
 /* When we want to type an element in HTML, we usually create an interface with the types that we want and
 extends the interface HTMLAttributes<Element */
 interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
-  className: string
   imgSrc: string
   dark?: boolean
 }

@@ -6,7 +6,7 @@ export function Reviews() {
     <MaxWidthWrapper className="relative max-w-5xl">
       <img
         aria-hidden="true"
-        src="/what-are-buying.png"
+        src="/what-people-are-buying.png"
         alt=""
         className="absolute -left-32 top-1/3 select-none xl:block"
       />
