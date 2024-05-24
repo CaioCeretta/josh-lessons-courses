@@ -25,7 +25,7 @@ const ReviewGrid = () => {
   const columns = splitArray(PHONES, 3)
   const column1 = columns[0]
   const column2 = columns[1]
-  const column3 = splitArray(columns[2], 2)
+  const column3 = columns[2]
 
   return (
     /* containerRef will hold a reference to this container, because this div will 
@@ -42,14 +42,14 @@ const ReviewGrid = () => {
             reviews={[...column1, ...column3.flat(), ...column2]}
             reviewClassName={(reviewIndex) =>
               cn({
-                'md:hidden': reviewIndex >= column1.length + column3[0].length,
+                'md:hidden': reviewIndex >= column1.length + column3.length,
                 'lg:hidden': reviewIndex >= column1.length,
               })
             }
             msPerPixel={10}
           />
           <ReviewColumn
-            reviews={[...column2, ...column3[1]]}
+            reviews={[...column2, ...column3]}
             className="hidden md:block "
             reviewClassName={(reviewIndex) =>
               reviewIndex >= column2.length ? 'lg:hidden' : ''

@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /* The T in this case is a generic
-all it does is that it checks if the T generic, if we pass, for example, a string array, than this array will be an array
+if we pass, for example, a string array, than this array will be an array
 of strings and this T will be string
 
 basically it allows us to have type safety in this function
