@@ -13,12 +13,14 @@ export const ourFileRouter = {
     .input(z.object({ configId: z.string().optional() }))
     // Set permissions and file types for this FileRoute
     .middleware(async ({ input }) => {
-      /* We are taking the input, passing it through the middleware and receiving in our own upload complete */
+      /* We are taking the input, passing it through the middleware, processing it
+      before the upload starts, it simply returns the input as it is */
       return { input }
     })
 
     .onUploadComplete(async ({ metadata, file }) => {
-      // This code RUNS ON YOUR SERVER after upload
+      /* This code RUNS ON YOUR SERVER after upload, it receives metadata and file informations, in this case it extracts
+      the configId from the metadata */
       const { configId } = metadata.input
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback

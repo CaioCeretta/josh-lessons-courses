@@ -27,17 +27,22 @@ const Page = () => {
   step, so we will control the loading state while the page is loading
  */
 
+  /* Use uploadtThing hook is used to manage the upload process, in this case, it is configured to use the 'imageUploader'
+  route, the useUploadthing('imageUploader') is set up to handle uploads via the imageUploader route
+   */
   const { startUpload, isUploading } = useUploadThing('imageUploader', {
     onClientUploadComplete: ([data]) => {
       const configId = data.serverData.configId
 
       /* With the startTransition we can display a loading state for the user while he is being redirected */
       startTransition(() => {
+        /* When the user is done uploading their image, we will push them to the next step and pass the id config of the
+        object they just uploaded */
         router.push(`/configure/design?id=${configId}`)
       })
     },
     onUploadProgress(p) {
-      /* Now we can use this p value to display our loading state */
+      /* The up this function gives us is the progress, so we can set the progress as it */
       setUploadProgress(p)
     },
   })
@@ -59,8 +64,9 @@ const Page = () => {
   }
 
   const onDropAccepted = (acceptedFiles: File[]) => {
-    /* This config id, is because on the core.ts, on the imageUploader function, we specified this as an input. One thing
-    is that it is optional, so we can pass the configId as undefined */
+    /* startUpload receives the configId, but in our case it is optional, so we can pass the configId as undefined
+    Right now the config is not relevant to us
+    */
 
     startUpload(acceptedFiles, { configId: undefined })
 
