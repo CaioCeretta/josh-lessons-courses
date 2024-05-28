@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createUploadthing, type FileRouter } from 'uploadthing/next'
 import { z } from 'zod'
+import sharp from 'sharp'
+import { db } from '@/db'
 
 const f = createUploadthing()
 
@@ -23,8 +25,41 @@ export const ourFileRouter = {
       the configId from the metadata */
       const { configId } = metadata.input
 
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { configId }
+      // Fetch the image
+      const res = await fetch(file.url)
+
+      // Convert to a buffer
+      const buffer = await res.arrayBuffer()
+
+      // grab the image metadata and retrieve width and height
+      const imageMetadata = await sharp(buffer).metadata()
+
+      const { width, height } = imageMetadata
+
+      if (!configId) {
+        const configuration = await db.configuration.create({
+          data: {
+            imageUrl: file.url,
+            height: height || 500,
+            width: width || 500,
+          },
+        })
+
+        return { configId: configuration.id }
+      } else {
+        const updatedConfiguration = db.configuration.update({
+          where: {
+            id: configId,
+          },
+          data: {
+            croppedImageUrl: file.url,
+          },
+        })
+
+        // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+
+        return { configId: updatedConfiguration }
+      }
     }),
 } satisfies FileRouter
 
