@@ -6,6 +6,8 @@ export const PRODUCT_PRICES = {
   },
   finish: {
     smooth: 0,
-    premium: 3_00,
+    textured: 3_00,
   },
 } as const
+
+export const BASE_PRICE = 14_00

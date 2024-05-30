@@ -8,16 +8,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils'
-import { COLORS, MODELS } from '@/validators/option-validator'
+import { BASE_PRICE } from '@/config/products'
+import { cn, formatPrice } from '@/lib/utils'
+import {
+  COLORS,
+  FINISHES,
+  MATERIALS,
+  MODELS,
+} from '@/validators/option-validator'
 import { RadioGroup } from '@headlessui/react'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
+import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
 import { Label } from '@radix-ui/react-label'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
+import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
 import { useState } from 'react'
 import { Rnd } from 'react-rnd'
-import { Check, ChevronsUpDown } from 'lucide-react'
-import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
 
 interface DesignConfiguratorProps {
   configId: string
@@ -34,13 +40,17 @@ const DesignConfigurator = ({
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number]
     model: (typeof MODELS.options)[number]
+    material: (typeof MATERIALS.options)[number]
+    finish: (typeof FINISHES.options)[number]
   }>({
     color: COLORS[0],
     model: MODELS.options[0],
+    material: MATERIALS.options[0],
+    finish: FINISHES.options[0],
   })
 
   return (
-    <div className="relative mb-20 mt-20 grid grid-cols-3 pb-20">
+    <div className="relative mb-20 mt-20 grid grid-cols-1 pb-20 lg:grid-cols-3">
       <div
         className="relative col-span-2 flex h-[37.5rem] w-full max-w-4xl
     items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300
@@ -101,7 +111,7 @@ const DesignConfigurator = ({
         </Rnd>
       </div>
 
-      <div className="flex h-[37.5rem] flex-col bg-white">
+      <div className="col-span-full flex h-[37.5rem] w-full flex-col bg-white lg:col-span-1">
         <ScrollArea className="relative flex-1 overflow-auto">
           <div
             aria-hidden="true"
@@ -204,10 +214,95 @@ const DesignConfigurator = ({
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
+
+                {/* Because both the materials and the finishes have the same structure, we can destructure it right away
+                They are both objects with name and options, so we can destructure the name and the options inside the map
+                */}
+                {[MATERIALS, FINISHES].map(
+                  ({ name, options: selectableOptions }) => (
+                    <RadioGroup
+                      key={name}
+                      value={options[name]}
+                      onChange={(val) => {
+                        /* The reason i used the [name]: val on the state setter, is because now that name value is dynamic
+                        because it can be both material or finish, we still don't know which one, but because both key
+                        and material are keys inside our state, whichever one is selected doesn't really matter, and that
+                        is the one we are going to set in the new value, which is like silicone, polycarbonate, ...
+                        */
+                        setOptions((prev) => ({
+                          ...prev,
+                          [name]: val,
+                        }))
+                      }}
+                    >
+                      <Label>
+                        {name.slice(0, 1).toUpperCase() + name.slice(1)}
+                      </Label>
+                      <div className="mt-3 space-y-4">
+                        {selectableOptions.map((option) => (
+                          <RadioGroup.Option
+                            key={option.value}
+                            value={option}
+                            className={({ active, checked }) =>
+                              cn(
+                                `relative block cursor-pointer rounded-lg border-2
+                                  bg-white px-6 py-4 shadow-sm outline-none
+                                  ring-0 focus:outline-none focus:ring-0 sm:flex sm:justify-between`,
+                                {
+                                  'border-primary': active || checked,
+                                },
+                              )
+                            }
+                          >
+                            <span className="flex items-center">
+                              <div className="flex flex-col text-sm">
+                                <RadioGroup.Label as="span">
+                                  {option.label}
+                                </RadioGroup.Label>
+
+                                {option.description ? (
+                                  <RadioGroup.Description
+                                    className="text-gray-500"
+                                    as="span"
+                                  >
+                                    <span className="block sm:inline">
+                                      {option.description}
+                                    </span>
+                                  </RadioGroup.Description>
+                                ) : null}
+                              </div>
+                            </span>
+                          </RadioGroup.Option>
+                        ))}
+                      </div>
+                    </RadioGroup>
+                  ),
+                )}
               </div>
             </div>
           </div>
         </ScrollArea>
+
+        <div className="h-16 w-full bg-white px-8">
+          <div className="h-px w-full bg-zinc-200" />
+          {/* The use of these two divs may seem reduntant, but the outer one focuses on taking the items to the end and
+          the inner one to space the two items */}
+          <div className="flex h-full w-full items-center justify-end">
+            <div className="flex w-full items-center gap-6">
+              <p className="whitespace-nowrap font-medium">
+                {formatPrice(
+                  (BASE_PRICE + options.finish.price + options.material.price) /
+                    100,
+                )}
+              </p>
+
+              <Button size={'sm'} className="w-full">
+                Continue
+                <ArrowRight className="ml-1.5 inline h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
