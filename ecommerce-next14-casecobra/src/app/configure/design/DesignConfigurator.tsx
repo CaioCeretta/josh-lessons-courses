@@ -22,7 +22,7 @@ import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
 import { Label } from '@radix-ui/react-label'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Rnd } from 'react-rnd'
 
 interface DesignConfiguratorProps {
@@ -49,9 +49,51 @@ const DesignConfigurator = ({
     finish: FINISHES.options[0],
   })
 
+  const [renderedDimension, setRenderedDimension] = useState({
+    width: imageDimensions.width / 4,
+    height: imageDimensions.height / 4,
+  })
+
+  const [renderedPosition, setRenderedPosition] = useState({
+    x: 150,
+    y: 205,
+  })
+
+  const phoneCaseRef = useRef<HTMLDivElement>(null)
+
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  async function saveConfiguration() {
+    try {
+      {
+        /* This are the left, right and top are offsets in px to the margins of the page in */
+      }
+      const {
+        left: caseLeft,
+        right: caseRight,
+        top: caseTop,
+        width,
+        height,
+      } = phoneCaseRef.current!.getBoundingClientRect()
+
+      const {
+        left: containerLeft,
+
+        top: containerTop,
+      } = containerRef.current!.getBoundingClientRect()
+
+      const leftOffset = caseLeft - containerLeft
+      const topOffset = caseTop - containerTop
+
+      const actualX = renderedPosition.x - leftOffset
+      const actualY = renderedPosition.y - topOffset
+    } catch (err) {}
+  }
+
   return (
     <div className="relative mb-20 mt-20 grid grid-cols-1 pb-20 lg:grid-cols-3">
       <div
+        ref={containerRef}
         className="relative col-span-2 flex h-[37.5rem] w-full max-w-4xl
     items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300
     p-12 text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
@@ -59,6 +101,7 @@ const DesignConfigurator = ({
         <div className="pointer-events-none relative aspect-[896/1861] w-60 bg-opacity-50">
           <AspectRatio
             ratio={896 / 1861}
+            ref={phoneCaseRef}
             className="pointer-events-none relative
             z-50 aspect-[896/1861] w-full"
           >
@@ -83,7 +126,7 @@ const DesignConfigurator = ({
             )}
           />
         </div>
-        {/* Wrapping the image with round will make it resizable and draggable */}
+        {/* Wrapping the image with Rnd will make it resizable and draggable */}
         <Rnd
           default={{
             x: 150,
@@ -93,6 +136,18 @@ const DesignConfigurator = ({
           }}
           className="absolute z-20 border-[3px] border-primary"
           lockAspectRatio
+          onResizeStop={(_, __, ref, ____, { x, y }) => {
+            setRenderedDimension({
+              height: parseInt(ref.style.height.slice(0, -2)),
+              width: parseInt(ref.style.width.slice(0, -2)),
+            })
+
+            setRenderedPosition({ x, y })
+          }}
+          onDragStop={(_, data) => {
+            const { x, y } = data
+            setRenderedPosition({ x, y })
+          }}
           resizeHandleComponent={{
             bottomRight: <HandleComponent />,
             bottomLeft: <HandleComponent />,
