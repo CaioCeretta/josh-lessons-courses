@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { BASE_PRICE } from '@/config/products'
+import { useUploadThing } from '@/lib/uploadthing'
 import { cn, formatPrice } from '@/lib/utils'
 import {
   COLORS,
@@ -24,6 +25,7 @@ import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Rnd } from 'react-rnd'
+import { useToast } from '@/components/ui/use-toast'
 
 interface DesignConfiguratorProps {
   configId: string
@@ -60,17 +62,33 @@ const DesignConfigurator = ({
   })
 
   const phoneCaseRef = useRef<HTMLDivElement>(null)
-
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const { toast } = useToast()
+
+  // Here we are destructuring the startUpload from the imageUploader method, inside our core route
+  const { startUpload } = useUploadThing('imageUploader')
+
+  async function base64ToBlob(base64: string, mimeType: string) {
+    const byteCharacters = atob(base64)
+    const byteNumbers = new Array(byteCharacters.length)
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i)
+    }
+
+    const byteArray = new Uint8Array(byteNumbers)
+
+    return new Blob([byteArray], { type: mimeType })
+  }
 
   async function saveConfiguration() {
     try {
-      {
-        /* This are the left, right and top are offsets in px to the margins of the page in */
-      }
+      /* This are the left, right and top are offsets in px to the margins of the page in */
+      console.log('test')
+
       const {
         left: caseLeft,
-        right: caseRight,
         top: caseTop,
         width,
         height,
@@ -87,7 +105,44 @@ const DesignConfigurator = ({
 
       const actualX = renderedPosition.x - leftOffset
       const actualY = renderedPosition.y - topOffset
-    } catch (err) {}
+
+      const canvas = document.createElement('canvas')
+
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')
+
+      const userImage = new Image()
+
+      userImage.crossOrigin = 'anonymous'
+
+      userImage.src = imageUrl
+
+      await new Promise((resolve) => (userImage.onload = resolve))
+
+      ctx?.drawImage(
+        userImage,
+        actualX,
+        actualY,
+        renderedDimension.width,
+        renderedDimension.height,
+      )
+
+      const base64 = canvas.toDataURL()
+
+      const base64Data = base64.split(',')[1]
+
+      const blob = await base64ToBlob(base64Data, 'image/png')
+
+      const file = new File([blob], 'filename.png', { type: 'image/png' })
+
+      startUpload([file], { configId })
+    } catch (err) {
+      toast({
+        title: 'Something went wrong',
+        description: 'There was a problem saving your config, please try again',
+      })
+    }
   }
 
   return (
@@ -351,7 +406,11 @@ const DesignConfigurator = ({
                 )}
               </p>
 
-              <Button size={'sm'} className="w-full">
+              <Button
+                onClick={saveConfiguration}
+                size={'sm'}
+                className="w-full"
+              >
                 Continue
                 <ArrowRight className="ml-1.5 inline h-4 w-4" />
               </Button>

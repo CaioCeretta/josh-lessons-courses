@@ -19,7 +19,6 @@ export const ourFileRouter = {
       before the upload starts, it simply returns the input as it is */
       return { input }
     })
-
     .onUploadComplete(async ({ metadata, file }) => {
       /* This code RUNS ON YOUR SERVER after upload, it receives metadata and file informations, in this case it extracts
       the configId from the metadata */
@@ -47,7 +46,7 @@ export const ourFileRouter = {
 
         return { configId: configuration.id }
       } else {
-        const updatedConfiguration = db.configuration.update({
+        const updatedConfiguration = await db.configuration.update({
           where: {
             id: configId,
           },
@@ -58,7 +57,7 @@ export const ourFileRouter = {
 
         // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
 
-        return { configId: updatedConfiguration }
+        return { configId: updatedConfiguration.id }
       }
     }),
 } satisfies FileRouter
