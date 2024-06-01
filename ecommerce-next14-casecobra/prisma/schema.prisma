@@ -12,11 +12,11 @@ datasource db {
 // enum is just a list of valid entries
 enum PhoneModel {
   iphonex
-  iphonexi
-  iphonexii
-  iphonexiii
-  iphoneiv
-  iphonev
+  iphone11
+  iphone12
+  iphone13
+  iphone14
+  iphone15
 }
 
 enum CaseMaterial {
@@ -41,6 +41,7 @@ model Configuration {
   width           Int
   height          Int
   imageUrl        String
+  color           CaseColor?
   model           PhoneModel?
   finish          CaseFinish?
   material        CaseMaterial?

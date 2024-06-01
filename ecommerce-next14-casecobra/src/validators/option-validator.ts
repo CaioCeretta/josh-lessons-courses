@@ -32,30 +32,31 @@ export const COLORS = [
 strings, so we know the number of elements and which elements */
 
 export const MODELS = {
+  name: 'models',
   options: [
     {
       label: 'Iphone X',
-      model: 'iphonex',
+      value: 'iphonex',
     },
     {
       label: 'Iphone 11',
-      model: 'iphone11',
+      value: 'iphone11',
     },
     {
       label: 'Iphone 12',
-      model: 'iphone12',
+      value: 'iphone12',
     },
     {
       label: 'Iphone 13',
-      model: 'iphone13',
+      value: 'iphone13',
     },
     {
       label: 'Iphone 14',
-      model: 'iphone14',
+      value: 'iphone14',
     },
     {
       label: 'Iphone 15',
-      model: 'iphone15',
+      value: 'iphone15',
     },
   ],
 } as const

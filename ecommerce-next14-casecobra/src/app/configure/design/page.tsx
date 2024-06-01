@@ -5,7 +5,9 @@ import { notFound } from 'next/navigation'
 import DesignConfigurator from './DesignConfigurator'
 interface PageProps {
   // The key will always be an array and the value can be each one of these, if its not passed, it's undefined
-  [key: string]: string | string[] | undefined
+  searchParams: {
+    [key: string]: string | string[] | undefined
+  }
 }
 
 // In next js, a page automatically receives some properties, which are the searchParams,

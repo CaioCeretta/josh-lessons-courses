@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useToast } from '@/components/ui/use-toast'
 import { BASE_PRICE } from '@/config/products'
 import { useUploadThing } from '@/lib/uploadthing'
 import { cn, formatPrice } from '@/lib/utils'
@@ -22,10 +23,12 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
 import { Label } from '@radix-ui/react-label'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
+import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { Rnd } from 'react-rnd'
-import { useToast } from '@/components/ui/use-toast'
+import { SaveConfigArgs, saveConfig as _saveConfig } from './actions'
 
 interface DesignConfiguratorProps {
   configId: string
@@ -38,6 +41,8 @@ const DesignConfigurator = ({
   imageUrl,
   imageDimensions,
 }: DesignConfiguratorProps) => {
+  const router = useRouter()
+
   /* We are setting the type of the options state to be an object of the same type as the COLORS constant we created */
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number]
@@ -65,6 +70,39 @@ const DesignConfigurator = ({
   const containerRef = useRef<HTMLDivElement>(null)
 
   const { toast } = useToast()
+
+  /* 
+  Mutations are used to handle the creation, update and data deletion on the server, they are distinct from queries, they
+  are designed to handle side effects that modify server data and provide utilities to handle it, in our case, we are going
+  to use for the configuration update
+
+  The mutation key is basically for when we want to utilize somewhere else, for invalidating the cache this would be
+  an use case. This is the same with the query, if we were using query
+
+
+  
+
+  */
+
+  /* Now, whenever we call the saveConfig function which is assigned the value of that mutation, these two functions are
+  going to be called and everything is going to be saved */
+
+  const { mutate: saveConfig } = useMutation({
+    mutationKey: ['save-config'],
+    /* In our case, args will be the same as the ones in the saveConfig Function
+     */
+    mutationFn: async (args: SaveConfigArgs) => {
+      await Promise.all([saveConfiguration(), _saveConfig(args)])
+    },
+    onError: () => {
+      toast({
+        title: 'Something went wrong',
+        description: 'There was an error on our end. Please try again',
+        variant: 'destructive',
+      })
+    },
+    onSuccess: () => [router.push(`/configure/preview?id=${configId}`)],
+  })
 
   // Here we are destructuring the startUpload from the imageUploader method, inside our core route
   const { startUpload } = useUploadThing('imageUploader')
@@ -407,7 +445,15 @@ const DesignConfigurator = ({
               </p>
 
               <Button
-                onClick={saveConfiguration}
+                onClick={() =>
+                  saveConfig({
+                    configId,
+                    color: options.color.value,
+                    finish: options.finish.value,
+                    material: options.material.value,
+                    model: options.model.value,
+                  })
+                }
                 size={'sm'}
                 className="w-full"
               >

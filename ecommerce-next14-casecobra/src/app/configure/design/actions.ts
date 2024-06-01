@@ -1,5 +1,16 @@
 'use server'
 
+import { db } from '@/db'
+import { CaseColor, CaseFinish, CaseMaterial, PhoneModel } from '@prisma/client'
+
+export type SaveConfigArgs = {
+  color: CaseColor
+  finish: CaseFinish
+  material: CaseMaterial
+  model: PhoneModel
+  configId: string
+}
+
 /* These are server side logic functions that we can write, by adding 'use server' to the first line, we tell next that
 we only want to execute everything inside this client in the server, never on the client, one example is when we utilize
 our db.
@@ -15,4 +26,14 @@ export async function saveConfig({
   material,
   model,
   configId,
-}) {}
+}: SaveConfigArgs) {
+  await db.configuration.update({
+    where: { id: configId },
+    data: {
+      color,
+      finish,
+      material,
+      model,
+    },
+  })
+}
