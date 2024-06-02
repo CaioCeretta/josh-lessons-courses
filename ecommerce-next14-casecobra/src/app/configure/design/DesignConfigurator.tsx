@@ -7,6 +7,7 @@ import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuContent,
 } from '@/components/ui/dropdown-menu'
 import { useToast } from '@/components/ui/use-toast'
 import { BASE_PRICE } from '@/config/products'
@@ -19,9 +20,8 @@ import {
   MODELS,
 } from '@/validators/option-validator'
 import { RadioGroup } from '@headlessui/react'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu'
-import { Label } from '@radix-ui/react-label'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Label } from '@/components/ui/label'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
@@ -334,8 +334,8 @@ const DesignConfigurator = ({
                         <DropdownMenuItem
                           key={model.label}
                           className={cn(
-                            `fap-1 flex cursor-default items-center p-1.5 text-sm
-                        hover:bg-zinc-100`,
+                            `fap-1 z-10 flex cursor-default items-center p-1.5
+                        text-sm hover:bg-zinc-100`,
                             {
                               'bg-zinc-100':
                                 model.label === options.model.label,
