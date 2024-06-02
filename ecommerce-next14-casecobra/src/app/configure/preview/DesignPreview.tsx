@@ -77,14 +77,14 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
                 <li>Packaging made from recycled materials</li>
                 <li>Five year print 🥳 </li>
               </ol>
+            </div>
 
-              <div>
-                <p className="materials text-zinc-950">Materials</p>
-                <ol className="mt-3 list-inside list-disc text-zinc-700">
-                  <li>High quality, durable material</li>
-                  <li>Scratch and fingerprint resistant coating</li>
-                </ol>
-              </div>
+            <div>
+              <p className="materials text-zinc-950">Materials</p>
+              <ol className="mt-3 list-inside list-disc text-zinc-700">
+                <li>High quality, durable material</li>
+                <li>Scratch and fingerprint resistant coating</li>
+              </ol>
             </div>
           </div>
         </div>
