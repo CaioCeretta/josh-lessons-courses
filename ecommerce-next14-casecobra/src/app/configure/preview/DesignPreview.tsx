@@ -1,10 +1,12 @@
 'use client'
 
 import Phone from '@/components/Phone'
-import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
+import { cn, formatPrice } from '@/lib/utils'
 import { COLORS, MODELS } from '@/validators/option-validator'
 import { Configuration } from '@prisma/client'
-import { Check } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-dom-confetti'
 
@@ -15,7 +17,14 @@ interface DesignPreviewProps {
 const DesignPreview = ({ configuration }: DesignPreviewProps) => {
   const [showConfetti, setShowConfetti] = useState(false)
 
-  const { color, model } = configuration
+  const { finish, color, model, material } = configuration
+
+  let totalPrice = BASE_PRICE
+
+  if (material === 'polycarbonate')
+    totalPrice += PRODUCT_PRICES.material.polycarbonate
+
+  if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
 
   const tw = COLORS.find((supportedColor) => {
     return supportedColor.value === color
@@ -80,11 +89,59 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
             </div>
 
             <div>
-              <p className="materials text-zinc-950">Materials</p>
+              <p className="font-medium text-zinc-950">Materials</p>
               <ol className="mt-3 list-inside list-disc text-zinc-700">
                 <li>High quality, durable material</li>
                 <li>Scratch and fingerprint resistant coating</li>
               </ol>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <div className="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
+              <div className="flow-root text-sm">
+                <div className="mt-2 flex items-center justify-between py-1">
+                  <p className="text-gray-600">Base Price</p>
+                  <p className="font-medium text-gray-900">
+                    {formatPrice(BASE_PRICE / 100)}
+                  </p>
+                </div>
+
+                {material === 'polycarbonate' ? (
+                  <div className="mt-2 flex items-center justify-between py-1">
+                    <p className="text-gray-600">Polycarbonated</p>
+                    <p className="font-medium text-gray-900">
+                      {formatPrice(PRODUCT_PRICES.material.polycarbonate / 100)}
+                    </p>
+                  </div>
+                ) : null}
+
+                {finish === 'textured' ? (
+                  <div className="mt-2 flex items-center justify-between py-1">
+                    <p className="text-gray-600">Textured Finish</p>
+                    <p className="font-medium text-gray-900">
+                      {formatPrice(PRODUCT_PRICES.finish.textured / 100)}
+                    </p>
+                  </div>
+                ) : null}
+
+                <div className="my-2 h-px bg-gray-200" />
+
+                <div className="flex items-center justify-center py-2">
+                  <p className="mx-2 font-semibold text-gray-900">
+                    Order Total:
+                  </p>
+                  <p className="font-semibold text-gray-900">
+                    {formatPrice(totalPrice / 100)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex justify-end pb-12">
+              <Button className="px-4 sm:px-6 lg:px-8">
+                Check Out <ArrowRight className="ml-1.5 inline h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>

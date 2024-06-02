@@ -10,4 +10,6 @@ export const PRODUCT_PRICES = {
   },
 } as const
 
+/*  14_00 will be 1400, so when we utilize it we need to divide by 100, so in conjunbction with the intl NumberFormat
+the price will be separated corretly by cents for the user */
 export const BASE_PRICE = 14_00
