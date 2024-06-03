@@ -6,6 +6,7 @@ import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { cn, formatPrice } from '@/lib/utils'
 import { COLORS, MODELS } from '@/validators/option-validator'
 import { Configuration } from '@prisma/client'
+import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-dom-confetti'
@@ -15,7 +16,11 @@ interface DesignPreviewProps {
 }
 
 const DesignPreview = ({ configuration }: DesignPreviewProps) => {
+
   const [showConfetti, setShowConfetti] = useState(false)
+  useEffect(() => {
+    setShowConfetti(true)
+  })
 
   const { finish, color, model, material } = configuration
 
@@ -34,9 +39,12 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
     ({ value }) => value === model,
   )!
 
-  useEffect(() => {
-    setShowConfetti(true)
-  })
+  const {} = useMutation(
+    mutationKey: ['get-checkout-session'],
+    mutationFn: () => {
+      
+    }
+  )
 
   return (
     <>
@@ -139,7 +147,7 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
             </div>
 
             <div className="mt-8 flex justify-end pb-12">
-              <Button className="px-4 sm:px-6 lg:px-8">
+              <Button loadingText="loading" className="px-4 sm:px-6 lg:px-8">
                 Check Out <ArrowRight className="ml-1.5 inline h-4 w-4" />
               </Button>
             </div>
