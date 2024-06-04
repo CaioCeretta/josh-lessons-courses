@@ -198,7 +198,7 @@ export default function Home() {
                   <p className="font-semibold">Jorginho</p>
                   <div className="flex items-center gap-1.5 text-zinc-600">
                     <Check className="h-4 w-4 stroke-[3px] text-green-600" />
-                    <p className="text-sm">Verified Purchase</p>
+                    <span className="text-sm">Verified Purchase</span>
                   </div>
                 </div>
               </div>
@@ -235,7 +235,7 @@ export default function Home() {
                   <p className="font-semibold">Claudia</p>
                   <div className="flex items-center gap-1.5 text-zinc-600">
                     <Check className="h-4 w-4 stroke-[3px] text-green-600" />
-                    <p className="text-sm">Verified Purchase</p>
+                    <span className="text-sm">Verified Purchase</span>
                   </div>
                 </div>
               </div>
@@ -250,15 +250,13 @@ export default function Home() {
               </div>
               <div className="text-lg leading-8">
                 <p>
-                  <p>
-                    "The case feels durable and i even got a compliment on the
-                    design. Had the case for two and a half months now and{' '}
-                    <span className="bg-slate-800 p-0.5 text-white">
-                      the image is super clear
-                    </span>
-                    , on the case i had before, the image started fading into
-                    yellowish color after a couple weeks, love it!
-                  </p>
+                  "The case feels durable and i even got a compliment on the
+                  design. Had the case for two and a half months now and{' '}
+                  <span className="bg-slate-800 p-0.5 text-white">
+                    the image is super clear
+                  </span>
+                  , on the case i had before, the image started fading into
+                  yellowish color after a couple weeks, love it!
                 </p>
               </div>
 
@@ -272,7 +270,7 @@ export default function Home() {
                   <p className="font-semibold">Cleitin</p>
                   <div className="flex items-center gap-1.5 text-zinc-600">
                     <Check className="h-4 w-4 stroke-[3px] text-green-600" />
-                    <p className="text-sm">Verified Purchase</p>
+                    <span className="text-sm">Verified Purchase</span>
                   </div>
                 </div>
               </div>

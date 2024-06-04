@@ -2,13 +2,15 @@
 import NextImage from 'next/image'
 
 import HandleComponent from '@/components/HandleComponent'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
+  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuContent,
 } from '@/components/ui/dropdown-menu'
+import { Label } from '@/components/ui/label'
 import { useToast } from '@/components/ui/use-toast'
 import { BASE_PRICE } from '@/config/products'
 import { useUploadThing } from '@/lib/uploadthing'
@@ -20,8 +22,6 @@ import {
   MODELS,
 } from '@/validators/option-validator'
 import { RadioGroup } from '@headlessui/react'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Label } from '@/components/ui/label'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
@@ -123,7 +123,6 @@ const DesignConfigurator = ({
   async function saveConfiguration() {
     try {
       /* This are the left, right and top are offsets in px to the margins of the page in */
-      console.log('test')
 
       const {
         left: caseLeft,

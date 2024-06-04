@@ -52,6 +52,7 @@ model Configuration {
   model           PhoneModel?
   finish          CaseFinish?
   material        CaseMaterial?
+  createdAt       DateTime      @default(now())
   croppedImageUrl String?
   Order           Order[]
 }

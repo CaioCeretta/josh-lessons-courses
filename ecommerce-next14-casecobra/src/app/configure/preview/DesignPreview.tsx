@@ -2,25 +2,31 @@
 
 import Phone from '@/components/Phone'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/use-toast'
 import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { cn, formatPrice } from '@/lib/utils'
 import { COLORS, MODELS } from '@/validators/option-validator'
 import { Configuration } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-dom-confetti'
+import { createCheckoutSession } from './actions'
 
 interface DesignPreviewProps {
   configuration: Configuration
 }
 
 const DesignPreview = ({ configuration }: DesignPreviewProps) => {
-
   const [showConfetti, setShowConfetti] = useState(false)
   useEffect(() => {
     setShowConfetti(true)
   })
+
+  const router = useRouter()
+
+  const { toast } = useToast()
 
   const { finish, color, model, material } = configuration
 
@@ -39,12 +45,22 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
     ({ value }) => value === model,
   )!
 
-  const {} = useMutation(
+  // When we call the function mutate it will invoke the entire flow of the mutation
+  const { mutate: createPaymentSession } = useMutation({
     mutationKey: ['get-checkout-session'],
-    mutationFn: () => {
-      
-    }
-  )
+    mutationFn: createCheckoutSession,
+    onSuccess: ({ url }) => {
+      if (url) router.push(url)
+      else throw new Error('Unable to retrieve payment URL')
+    },
+    onError: () => {
+      toast({
+        title: 'Something went wrong',
+        description: 'There was an error on our end. Please try again',
+        variant: 'destructive',
+      })
+    },
+  })
 
   return (
     <>
@@ -147,7 +163,12 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
             </div>
 
             <div className="mt-8 flex justify-end pb-12">
-              <Button loadingText="loading" className="px-4 sm:px-6 lg:px-8">
+              <Button
+                onClick={() =>
+                  createPaymentSession({ configId: configuration.id })
+                }
+                className="px-4 sm:px-6 lg:px-8"
+              >
                 Check Out <ArrowRight className="ml-1.5 inline h-4 w-4" />
               </Button>
             </div>
