@@ -13,13 +13,18 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-dom-confetti'
 import { createCheckoutSession } from './actions'
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import LoginModal from '@/components/LoginModal'
 
 interface DesignPreviewProps {
   configuration: Configuration
 }
 
 const DesignPreview = ({ configuration }: DesignPreviewProps) => {
-  const [showConfetti, setShowConfetti] = useState(false)
+  const [showConfetti, setShowConfetti] = useState<boolean>(false)
+
+  const [isLoginModalOpen, setIsLoginModelOpen] = useState<boolean>(false)
+
   useEffect(() => {
     setShowConfetti(true)
   })
@@ -27,6 +32,10 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
   const router = useRouter()
 
   const { toast } = useToast()
+
+  const { id } = configuration
+
+  const { user } = useKindeBrowserClient()
 
   const { finish, color, model, material } = configuration
 
@@ -62,6 +71,17 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
     },
   })
 
+  const handleCheckout = () => {
+    if (user) {
+      // create payment session
+      createPaymentSession({ configId: id })
+    } else {
+      // need to log in
+      localStorage.setItem('@casecobra/configurationId', id)
+      setIsLoginModelOpen(true)
+    }
+  }
+
   return (
     <>
       <div
@@ -77,6 +97,8 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
           }}
         />
       </div>
+
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModelOpen} />
 
       <div
         className="mt-20 grid grid-cols-1 text-sm sm:grid-cols-12 sm:grid-rows-1
@@ -164,9 +186,7 @@ const DesignPreview = ({ configuration }: DesignPreviewProps) => {
 
             <div className="mt-8 flex justify-end pb-12">
               <Button
-                onClick={() =>
-                  createPaymentSession({ configId: configuration.id })
-                }
+                onClick={() => handleCheckout()}
                 className="px-4 sm:px-6 lg:px-8"
               >
                 Check Out <ArrowRight className="ml-1.5 inline h-4 w-4" />
