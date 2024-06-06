@@ -1,12 +1,14 @@
+import { db } from '@/db'
 import { stripe } from '@/lib/stripe'
 
 import { headers } from 'next/headers'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
 /* Method which we expect this function to handle */
 export async function POST(req: NextRequest) {
   try {
+    /* The raw body is important to verify that it came from stripe */
     const body = await req.text()
 
     const signature = headers().get('stripe-signature')
@@ -37,6 +39,47 @@ export async function POST(req: NextRequest) {
       if (!userId || !orderId) {
         throw new Error('Invalid request metadata')
       }
+
+      const billingAddress = session.customer_details!.address
+      const shippingAddress = session.customer_details!.address
+
+      await db.order.update({
+        where: {
+          id: orderId,
+        },
+        data: {
+          isPaid: true,
+          shippingAddress: {
+            create: {
+              name: session.customer_details!.name!,
+              city: shippingAddress!.city!,
+              country: shippingAddress!.country!,
+              postalCode: shippingAddress!.postal_code!,
+              street: shippingAddress!.line1!,
+              state: shippingAddress!.state!,
+            },
+          },
+          billingAddress: {
+            create: {
+              name: session.customer_details!.name!,
+              city: billingAddress!.city!,
+              country: billingAddress!.country!,
+              postalCode: billingAddress!.postal_code!,
+              street: billingAddress!.line1!,
+              state: billingAddress!.state!,
+            },
+          },
+        },
+      })
     }
-  } catch (err) {}
+
+    return NextResponse.json({ result: event, ok: true })
+  } catch (err) {
+    console.error(err)
+
+    return NextResponse.json(
+      { message: 'Something went wrong' },
+      { status: 500 },
+    )
+  }
 }
