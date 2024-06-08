@@ -4,7 +4,7 @@ import { Progress } from '@/components/ui/progress'
 import { useToast } from '@/components/ui/use-toast'
 import { useUploadThing } from '@/lib/uploadthing'
 import { cn } from '@/lib/utils'
-import { Image, Loader2, MousePointerSquareDashedIcon } from 'lucide-react'
+import { Loader2, MousePointerSquareDashedIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import Dropzone, { FileRejection } from 'react-dropzone'
@@ -109,7 +109,7 @@ const Page = () => {
               ) : isUploading || isPending ? (
                 <Loader2 className="mb-2 h-6 w-6 animate-spin text-zinc-500" />
               ) : (
-                <Image className="mb-2 h-6 w-6 text-zinc-500" />
+                <div className="mb-2 h-6 w-6 text-zinc-500" />
               )}
               <div className="mb-2 flex flex-col justify-center text-sm text-zinc-700">
                 {isUploading ? (
