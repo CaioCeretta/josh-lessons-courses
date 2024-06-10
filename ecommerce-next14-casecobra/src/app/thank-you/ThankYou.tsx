@@ -1,9 +1,10 @@
 'use client'
 
+import PhonePreview from '@/components/PhonePreview'
 import { useQuery } from '@tanstack/react-query'
-import { getPaymentStatus } from './actions'
-import { useSearchParams } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
+import { getPaymentStatus } from './actions'
 
 const ThankYou = () => {
   const searchParams = useSearchParams()
@@ -50,7 +51,36 @@ const ThankYou = () => {
           <h1 className="text-base font-medium text-primary">
             Thank you for your order
           </h1>
-          <p className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl"></p>
+          <p className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">
+            Your case is on the way!
+          </p>
+          <div className="mt-12 text-sm font-medium">
+            <p className="text-zinc-900">Order Number</p>
+            <p className="text-zinc-5t0 mt-2">{orderId}</p>
+          </div>
+        </div>
+        <div className="mt-10 border-t border-zinc-200">
+          <div className="mt-10 flex flex-auto flex-col">
+            <h4 className="font-semibold text-zinc-900">
+              You made a great choice
+            </h4>
+            <p className="mt-2 text-sm text-zinc-600">
+              We at CaseCobra believe that a phone case doesn't only need to
+              look good, but also last you for the years to come. We offer a
+              5-year print guarantee: If your case isn't of the highest quality,
+              we'll replace it for free.
+            </p>
+          </div>
+        </div>
+        <div
+          className="mt-4 flex space-x-6 overflow-hidden rounded-xl bg-gray-900/5
+        ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl"
+        >
+          <PhonePreview
+            color={color!}
+            croppedImageUrl={configuration.croppedImageUrl!}
+            key={data.configuration.id}
+          />
         </div>
       </div>
     </div>
