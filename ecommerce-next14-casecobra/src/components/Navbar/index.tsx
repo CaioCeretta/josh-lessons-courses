@@ -7,7 +7,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 const NavBar = async () => {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
-  const isAdmin = false
+  const isAdmin = user?.email === 'caioceretta@gmail.com'
 
   return (
     /* The backdrop-blur-lg says how much i want to the blur and that i when we scroll down it will blur on the nav */
@@ -35,7 +35,7 @@ const NavBar = async () => {
                 </Link>
                 {isAdmin ? (
                   <Link
-                    href="/api/auth/logout"
+                    href="/dashboard"
                     className={buttonVariants({
                       size: 'sm',
                       variant: 'ghost',
@@ -69,7 +69,7 @@ const NavBar = async () => {
                 </Link>
 
                 <Link
-                  href="/configure/upload"
+                  href="/api/auth/login"
                   className={buttonVariants({
                     size: 'sm',
                     variant: 'ghost',

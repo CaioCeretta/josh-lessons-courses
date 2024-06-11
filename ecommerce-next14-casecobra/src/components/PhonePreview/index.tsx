@@ -10,10 +10,9 @@ interface PhonePreviewProps {
   croppedImageUrl: string
 }
 
-const PhonePreview = ({ color, croppedImageUrl }: PhonePreviewProps) => {
+const PhonePreview = ({ croppedImageUrl, color }: PhonePreviewProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
-  /* eslint-disable-next-line */
   const [renderedDimensions, setRenderedDimensions] = useState({
     height: 0,
     width: 0,
@@ -21,9 +20,7 @@ const PhonePreview = ({ color, croppedImageUrl }: PhonePreviewProps) => {
 
   const handleResize = () => {
     if (!ref.current) return
-    /* The ref getBoundingClientRect gives us the width and the height of the element being referenced */
     const { width, height } = ref.current.getBoundingClientRect()
-
     setRenderedDimensions({ width, height })
   }
 
@@ -36,9 +33,8 @@ const PhonePreview = ({ color, croppedImageUrl }: PhonePreviewProps) => {
   }, [ref.current])
 
   let caseBackgroundColor = 'bg-zinc-950'
-
   if (color === 'blue') caseBackgroundColor = 'bg-blue-950'
-  if (color === 'rose') caseBackgroundColor = 'bg-rose-900'
+  if (color === 'rose') caseBackgroundColor = 'bg-rose-950'
   if (color === 'green') caseBackgroundColor = 'bg-green-950'
 
   return (
@@ -54,22 +50,21 @@ const PhonePreview = ({ color, croppedImageUrl }: PhonePreviewProps) => {
       >
         <img
           width={renderedDimensions.width / (3000 / 637)}
-          alt="phone-hands"
           className={cn(
-            `phone-skew round-b-[10px] md:rounded-b-[20px relative z-20 rounded-t-[15px]
-          md:rounded-t-[30px]`,
+            `phone-skew relative z-20 rounded-b-[10px] rounded-t-[15px] md:rounded-b-[20px]
+            md:rounded-t-[30px]`,
             caseBackgroundColor,
           )}
           src={croppedImageUrl}
+          alt="cropped image phone"
         />
       </div>
 
       <div className="relative z-40 h-full w-full">
         <img
+          alt="phone"
           src="/clearphone.png"
-          alt="Phone"
-          className="pointer-events-none h-full
-        w-full rounded-md antialiased"
+          className="pointer-events-none h-full w-full rounded-md antialiased"
         />
       </div>
     </AspectRatio>
