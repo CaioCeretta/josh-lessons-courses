@@ -87,7 +87,7 @@ const DesignConfigurator = ({
   /* Now, whenever we call the saveConfig function which is assigned the value of that mutation, these two functions are
   going to be called and everything is going to be saved */
 
-  const { mutate: saveConfig } = useMutation({
+  const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ['save-config'],
     /* In our case, args will be the same as the ones in the saveConfig Function
      */
@@ -444,6 +444,9 @@ const DesignConfigurator = ({
               </p>
 
               <Button
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
                 onClick={() =>
                   saveConfig({
                     configId,
