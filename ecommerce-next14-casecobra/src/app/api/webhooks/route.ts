@@ -2,12 +2,12 @@ import { db } from '@/db'
 import { stripe } from '@/lib/stripe'
 import { Resend } from 'resend'
 
+import OrderReceivedEmail from '@/components/emails/OrderReceivedEmail'
 import { headers } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import OrderReceivedEmail from '@/components/emails/OrderReceivedEmail'
 
-const resend = new Resend(process.env.RESEND_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 /* Method which we expect this function to handle */
 export async function POST(req: NextRequest) {
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      await resend.emails.send({
+      const { data, error } = await resend.emails.send({
         from: 'CaseCobra <caioceretta@gmail.com>',
         to: [event.data.object.customer_details.email],
         subject: 'Thanks for your order!',
@@ -94,6 +94,10 @@ export async function POST(req: NextRequest) {
           },
         }),
       })
+
+      if (error) {
+        console.log(error)
+      }
     }
 
     return NextResponse.json({ result: event, ok: true })
