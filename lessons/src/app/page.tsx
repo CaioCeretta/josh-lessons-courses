@@ -13,6 +13,9 @@ export default function Home() {
 
 
       <Link className="text-xl font-bold border p-5 rounded-full" href="/server-action-problem">Server Action Problems</Link>
+      <Link className="text-xl font-bold border p-5 rounded-full" href="/animation">Animation Libraries</Link>
+
     </main>
+
   );
 }
