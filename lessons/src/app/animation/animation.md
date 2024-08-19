@@ -26,3 +26,6 @@ export function cn(...inputs: ClassValue[]) {
 cn function is a helper utility that makes it easier to handle className manipulation in a tailwind environment. Ensuring
 that classNames are appropriately merged and any conflicts are resolved, making the component styling more consistent and
 maintainable
+
+/* End of Reminder */
+

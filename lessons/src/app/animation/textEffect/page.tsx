@@ -2,6 +2,8 @@ import { TextEffect } from "../_components/TextEffect";
 
 export default function TextEffectExamples() {
 
+  /*https://motion-primitives.com/docs/text-effect*/
+
   return (
     <>
       <h1 className="text-3xl">Text effects</h1>

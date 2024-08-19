@@ -11,6 +11,7 @@ const Animation = () => {
       <ul className="flex flex-col gap-20 text-xl py-3 items-center justify-center">
         <li><Link href="/animation/TextEffectExamples" className="border p-5 rounded-xl">Text Examples</Link></li>
         <li><Link href="/animation/accordion" className="border p-5 rounded-xl">Accordion Examples</Link></li>
+        <li><Link href="/animation/animated-background" className="border p-5 rounded-xl">Animated Background Examples</Link></li>
       </ul>
     </div>
   );
