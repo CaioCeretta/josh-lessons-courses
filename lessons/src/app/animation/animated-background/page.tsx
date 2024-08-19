@@ -11,6 +11,7 @@ const AnimatedBackground = () => {
             <li><Link href='./animated-background/AnimatedTabs'>Animated Tabs</Link></li>
             <li><Link href='./animated-background/AnimatedTabsHover'>Animated Tabs Hover</Link></li>
             <li><Link href='./animated-background/AnimatedCardBackground'>Animated Card Background</Link></li>
+            <li><Link href='./animated-background/SegmentedControl'>Segmented Control</Link></li>
             
 
           </ul>
