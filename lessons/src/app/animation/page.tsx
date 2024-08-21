@@ -12,6 +12,7 @@ const Animation = () => {
         <li><Link href="/animation/TextEffectExamples" className="border p-5 rounded-xl">Text Examples</Link></li>
         <li><Link href="/animation/accordion" className="border p-5 rounded-xl">Accordion Examples</Link></li>
         <li><Link href="/animation/animated-background" className="border p-5 rounded-xl">Animated Background Examples</Link></li>
+        <li><Link href="/animation/cursor" className="border p-5 rounded-xl">Cursor Examples</Link></li>
       </ul>
     </div>
   );
