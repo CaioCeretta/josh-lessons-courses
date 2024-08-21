@@ -18,7 +18,7 @@ export default function CursorImageSpring2() {
   };
 
   return (
-    <div className='flex h-[400px] w-full items-center justify-center'>
+    <div className='flex flex-col gap-3 h-[400px] w-full items-center justify-center'>
       <h1>Cursor Image Spring 2</h1>
       <Cursor
         attachToParent

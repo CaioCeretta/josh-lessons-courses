@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import {
-  Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent
 } from '../_components/Accordion'
 
-export default function AccordionBasic() {
+export default function Accordion() {
   return (
     <div className="mx-auto w-[700px]">
       <h1 className="text-[2rem] font-bold text-center my-5">Accordion Examples</h1>

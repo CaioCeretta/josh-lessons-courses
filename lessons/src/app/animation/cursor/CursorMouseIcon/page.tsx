@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { SVGProps } from 'react';
 import { Cursor } from '../../_components/Cursor';
 
