@@ -7,13 +7,14 @@ const Animation = () => {
 
   return (
     <div className="flex flex-col items-center gap-5">
-      <h1 className="text-3xl mb-10 ">Animation Examples</h1>
+      <h1 className="text-3xl mb-10 ">Animation </h1>
       <ul className="flex flex-col gap-20 text-xl py-3 items-center justify-center">
-        <li><Link href="/animation/TextEffectExamples" className="border p-5 rounded-xl">Text Examples</Link></li>
-        <li><Link href="/animation/accordion" className="border p-5 rounded-xl">Accordion Examples</Link></li>
-        <li><Link href="/animation/animated-background" className="border p-5 rounded-xl">Animated Background Examples</Link></li>
-        <li><Link href="/animation/cursor" className="border p-5 rounded-xl">Cursor Examples</Link></li>
-        <li><Link href="/animation/carousel" className="border p-5 rounded-xl">Carousel Examples</Link></li>
+        <li><Link href="/animation/TextEffectExamples" className="border p-5 rounded-xl">Text</Link></li>
+        <li><Link href="/animation/accordion" className="border p-5 rounded-xl">Accordion</Link></li>
+        <li><Link href="/animation/animated-background" className="border p-5 rounded-xl">Animated Background</Link></li>
+        <li><Link href="/animation/cursor" className="border p-5 rounded-xl">Cursor</Link></li>
+        <li><Link href="/animation/carousel" className="border p-5 rounded-xl">Carousel</Link></li>
+        <li><Link href="/animation/animated-number" className="border p-5 rounded-xl">Animated Number</Link></li>
       </ul>
     </div>
   );
