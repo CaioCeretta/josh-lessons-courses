@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../_components/Accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../_components/accordion";
 
 const AccordionBasics = () => {
   return (

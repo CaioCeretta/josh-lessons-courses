@@ -8,7 +8,7 @@ import {
   DialogClose,
   DialogDescription,
   DialogContainer,
-} from '@/app/animation/_components/Dialog';
+} from '@/app/animation/_components/dialog';
 import { PlusIcon } from 'lucide-react';
 
 export default function DialogBasicOne() {

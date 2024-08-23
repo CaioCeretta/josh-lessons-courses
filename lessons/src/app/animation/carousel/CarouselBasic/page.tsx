@@ -4,7 +4,7 @@ import {
   CarouselNavigation,
   CarouselIndicator,
   CarouselItem,
-} from '@/app/animation/_components/Carousel';
+} from '@/app/animation/_components/carousel';
 
 
 

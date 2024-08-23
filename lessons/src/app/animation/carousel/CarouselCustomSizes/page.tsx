@@ -3,7 +3,7 @@ import {
   CarouselContent,
   CarouselNavigation,
   CarouselItem,
-} from '@/app/animation/_components/Carousel';
+} from '@/app/animation/_components/carousel';
 
 export default function CarouselCustomSizes() {
   return (

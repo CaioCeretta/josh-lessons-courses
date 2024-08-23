@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { AnimatedNumber } from '@/app/animation/_components/AnimatedNumber';
-
+import { AnimatedNumber } from '@/app/animation/_components/animated-number';
 
 const BasicAnimatedNumber = () => {
   const [value, setValue] = useState(0);

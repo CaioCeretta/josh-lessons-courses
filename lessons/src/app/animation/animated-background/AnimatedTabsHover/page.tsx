@@ -1,4 +1,4 @@
-import AnimatedBackground from "../../_components/AnimatedBackground";
+import AnimatedBackground from "../../_components/animated-background";
 
 import Link from 'next/link'
 

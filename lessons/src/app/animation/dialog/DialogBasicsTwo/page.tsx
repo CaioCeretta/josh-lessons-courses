@@ -7,7 +7,7 @@ import {
   DialogSubtitle,
   DialogTitle,
   DialogTrigger,
-} from '@/app/animation/_components/Dialog';
+} from '@/app/animation/_components/dialog';
 import { ScrollArea } from '@/app/animation/_components/scroll-area';
 
 export default function DialogBasicTwo() {

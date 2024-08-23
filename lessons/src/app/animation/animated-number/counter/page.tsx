@@ -1,5 +1,5 @@
 'use client';
-import { AnimatedNumber } from '@/app/animation/_components/AnimatedNumber';
+import { AnimatedNumber } from '@/app/animation/_components/animated-number';
 import { useInView } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
 import { useRef, useState } from 'react';

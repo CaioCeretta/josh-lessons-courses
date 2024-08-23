@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TextEffect } from "./_components/TextEffect";
+
 
 
 
@@ -16,6 +16,7 @@ const Animation = () => {
         <li><Link href="/animation/carousel" className="border p-5 rounded-xl">Carousel</Link></li>
         <li><Link href="/animation/animated-number" className="border p-5 rounded-xl">Animated Number</Link></li>
         <li><Link href="/animation/dialog" className="border p-5 rounded-xl">Dialog</Link></li>
+        <li><Link href="/animation/inView" className="border p-5 rounded-xl">In View</Link></li>
       </ul>
     </div>
   );

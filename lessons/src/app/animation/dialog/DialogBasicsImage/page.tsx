@@ -5,7 +5,7 @@ import {
   DialogClose,
   DialogImage,
   DialogContainer,
-} from '@/app/animation/_components/Dialog';
+} from '@/app/animation/_components/dialog';
 import { XIcon } from 'lucide-react';
 
 export default function DialogBasicImage() {

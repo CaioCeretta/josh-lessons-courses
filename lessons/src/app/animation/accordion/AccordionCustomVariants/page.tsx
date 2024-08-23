@@ -3,7 +3,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from '../../_components/Accordion'
+} from '../../_components/accordion'
 
 import { ChevronRight } from 'lucide-react';
 

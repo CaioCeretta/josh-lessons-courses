@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../../_components/Accordion";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../../_components/accordion";
 
 
 export default function AccordionBasic() {
