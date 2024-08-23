@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Cursor = () => {
+const Dialog = () => {
 
   return (
     <>
@@ -11,7 +11,7 @@ const Cursor = () => {
 
           <div className="border p-5 rounded-full"><Link href='./dialog/DialogBasicsOne'>Dialog Basics One</Link></div>
           <div className="border p-5 rounded-full"><Link href='./dialog/DialogBasicsTwo'>Dialog Basics Two</Link></div>
-          <div className="border p-5 rounded-full"><Link href='./dialog/DialogBasicImage'>Dialog Basic Image</Link></div>
+          <div className="border p-5 rounded-full"><Link href='./dialog/DialogBasicsImage'>Dialog Basic Image</Link></div>
 
 
 
@@ -21,4 +21,4 @@ const Cursor = () => {
   );
 }
 
-export default Cursor;
+export default Dialog;

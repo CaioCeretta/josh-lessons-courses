@@ -1,13 +1,13 @@
 import {
   Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogImage,
-  DialogSubtitle,
   DialogClose,
   DialogContainer,
-} from '@/app/animation/_components/Dialog'
+  DialogContent,
+  DialogImage,
+  DialogSubtitle,
+  DialogTitle,
+  DialogTrigger,
+} from '@/app/animation/_components/Dialog';
 import { ScrollArea } from '@/app/animation/_components/scroll-area';
 
 export default function DialogBasicTwo() {
@@ -35,7 +35,7 @@ export default function DialogBasicTwo() {
             }}
           />
           <div className='flex flex-col items-start justify-center space-y-0'>
-            <DialogTitle className='text-[10px] font-medium text-black sm:text-xs'>
+            <DialogTitle className='text-[10p0x] font-medium text-black sm:text-xs'>
               What I Talk About When I Talk About Running
             </DialogTitle>
             <DialogSubtitle className='text-[10px] text-gray-600 sm:text-xs'>

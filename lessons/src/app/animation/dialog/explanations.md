@@ -36,5 +36,40 @@ On button click, we will have the expanded dialog, where we are going to have al
 and the dialog content. The dialog description component may receive a boolean of disableLayoutAnimation, that would hide
 the miniature of the trigger dialog. And a property of the variants that we want to include on that description, variants like
 initial, animate, exit.
-Inside the description we are going to have some p tags where we will fill that description like we would do normally
-and below the description we will have a DialogClose
+Then we are going to have a Dialog container which is going to wrap the Dialog content. Inside of it, we are going to have
+an image, a title, subtitle and a description that consists of a set of p tags where we would fill that description like
+we would do normally and below the description we will have a DialogClose
+
+## Dialog Basics Two
+
+In this Dialog we have a similar structure, on the transition we have a difference, our dialog transition consisted of
+a type string, bounce and duration, duration is the time the animation takes to finish, and the bounce is the same as a 
+spring effect when it reaches the bottom. On this other example, we have also the type of string, but now we have the stiffnes
+and damping
+
+Transition Effects
+
+Stiffness
+What it does: Controls how stiff the spring is. A higher stiffness means the spring is stronger, making the animation move
+faster and more rigidly towards its target.
+
+Effect: Increasing the stiffness value will result in a quicker, more forceful animation. Conversely, lowering the stiffness
+will make the animation slower and more fluid. 
+
+Damping
+What it does: Controls how much the spring resists oscillation (bouncing). Higher damping means the spring will come to
+rest more quickly with less oscillation.
+
+Effect: Increasing the damping value will reduce the amount of bounce, making the animation settle faster. Lowering the
+damping will make the animation bounce more before coming to rest. The other difference is that this is a full row at the top
+but that is common behavior of the parent element, in the first example we had a fixed width around everything
+
+
+## Dialog Basics Image
+
+The dialog basic image is an example of a click expanding the image of the dialog, it's just a dialog with the transition of
+ease: 'easeInOut', which will cause the animation to be smooth, fast in the beginning and slow at the end. the image would
+be in a smaller size, then on clikc it would expand the dialog which would only have on itws content the DialogImage
+with the classes of the width and the height, and a dialog close
+
+
