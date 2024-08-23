@@ -1,6 +1,6 @@
 import { InView } from '@/app/animation/_components/in-view';
 
-export function InViewBasicMultiple() {
+export default function InViewBasicMultiple() {
   return (
     <div className='h-[350px] w-full overflow-y-auto overflow-x-hidden'>
       <div className='mb-36 py-12 text-center text-sm'>Scroll down</div>

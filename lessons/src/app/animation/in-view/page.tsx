@@ -8,9 +8,9 @@ export default function InView() {
 
       <div className="flex flex-col items-center my-10 gap-5">
 
-        <Link href="inView/BasicInView">InView Basics</Link>
-        <Link href="inView/InViewwithMargins">InView with Margins</Link>
-        <Link href="inView/InViewWithImagesandMargins">InView with Images and Margins</Link>
+        <Link href="in-view/BasicInView">InView Basics</Link>
+        <Link href="in-view/InViewWithMargins">InView with Margins</Link>
+        <Link href="in-view/InViewWithImageAndMargins">InView with Images and Margins</Link>
 
       </div>
 

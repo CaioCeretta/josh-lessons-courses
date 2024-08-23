@@ -2,7 +2,7 @@
 import { InView } from '@/app/animation/_components/in-view';
 import { motion } from 'framer-motion';
 
-export function InViewImagesGrid() {
+export default function InViewImagesGrid() {
   return (
     <div className='h-full w-full overflow-auto'>
       <div className='mb-20 py-12 text-center text-sm'>Scroll down</div>
