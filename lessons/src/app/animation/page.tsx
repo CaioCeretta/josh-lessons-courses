@@ -15,6 +15,8 @@ const Animation = () => {
         <li><Link href="/animation/animated-number" className="border p-5 rounded-xl">Animated Number</Link></li>
         <li><Link href="/animation/dialog" className="border p-5 rounded-xl">Dialog</Link></li>
         <li><Link href="/animation/in-view" className="border p-5 rounded-xl">In View</Link></li>
+        <li><Link href="/animation/popover" className="border p-5 rounded-xl">PopOver</Link></li>
+        
       </ul>
     </div>
   );
