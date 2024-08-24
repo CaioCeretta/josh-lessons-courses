@@ -17,6 +17,7 @@ const Animation = () => {
         <li><Link href="/animation/in-view" className="border p-5 rounded-xl">In View</Link></li>
         <li><Link href="/animation/popover" className="border p-5 rounded-xl">PopOver</Link></li>
         <li><Link href="/animation/toolbar-dynamic" className="border p-5 rounded-xl">Toolbar Dynamic</Link></li>
+        <li><Link href="/animation/toolbar-expandable" className="border p-5 rounded-xl">Toolbar Expandable</Link></li>
         
       </ul>
     </div>
